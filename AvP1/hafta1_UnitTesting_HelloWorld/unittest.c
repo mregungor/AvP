@@ -1,4 +1,4 @@
-#include <CUnit/CUnit.h>
+#include <CUnit/Headers/CUnit_intl.h>
 #include <CUnit/Basic.h>
 
 #include <stdio.h>
