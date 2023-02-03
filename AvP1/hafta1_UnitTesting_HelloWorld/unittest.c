@@ -1,6 +1,8 @@
 #include <CUnit/Headers/CUnit_intl.h>
 #include <CUnit/Basic.h>
 
+#include <stdio.h>
+
 int add(int a, int b) {
   return a + b;
 }
