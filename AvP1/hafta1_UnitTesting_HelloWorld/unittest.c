@@ -1,23 +1,16 @@
-#include <CUnit/Headers/CUnit_intl.h>
-#include <CUnit/Basic.h>
-
-#include <stdio.h>
-
-int add(int a, int b) {
-  return a + b;
-}
+#include <assert.h>
 
 void test_add(void) {
-  CU_ASSERT_EQUAL(add(1, 2), 3);
-  CU_ASSERT_EQUAL(add(0, 0), 0);
-  CU_ASSERT_EQUAL(add(-1, -1), -2);
+  assert(add(-1, -2) == -3);
+  assert(add(1, 5) == 3);
+  assert(add(0, 0) == 0);
 }
 
 int main() {
-  CU_initialize_registry();
-  CU_pSuite suite = CU_add_suite("add_suite", 0, 0);
-  CU_add_test(suite, "test_add", test_add);
-  CU_basic_run_tests();
-  CU_cleanup_registry();
+  test_add();
   return 0;
+}
+int add(int a, int b) {
+  return a + b;
+  //Kodu buraya yaz�n�z !
 }
