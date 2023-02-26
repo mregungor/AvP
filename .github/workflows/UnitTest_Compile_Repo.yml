@@ -11,16 +11,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-                 persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-                 fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
-      - name: Build unit.c
-        run: gcc -o unitTest unitTest.c
 
+      - name: Previous Txt 
+        run: echo "Not: 0" >> not.txt
+        
+      - name: Build unit.c
+        run: gcc -o unit unit.c
+        
       - name: Commit changes
         run: |
+          date > generated.txt
+          echo not.txt
+          ./unit
           git config user.name mregungor
           git config user.email emre.gungor@ksbu.edu.tr
           git add .
           git commit -m "generated"
-          git push 
+          git push
