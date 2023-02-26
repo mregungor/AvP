@@ -8,7 +8,7 @@ int main()
     int dogrutestsayisi=0;
     //create a .txt file
     if (fp == NULL) {
-        printf("Dosya acilamadi.\n");
+        printf("File Pointer Null. Dosya acilamadi.\n");
         return -1;
     }
 
