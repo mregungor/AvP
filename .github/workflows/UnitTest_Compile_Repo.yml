@@ -11,6 +11,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        
+      - name: Add initial notTXT
+        run: echo "0" > not.txt
 
       - name: Build unitTest.c
         run: gcc -o unitTest unitTest.c
