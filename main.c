@@ -25,8 +25,3 @@ float bol(float sayi1, float sayi2) {
         return sayi1 / sayi2;
     }
 }
-
-int main() {
-
-    return 0;
-}
