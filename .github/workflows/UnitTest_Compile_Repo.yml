@@ -14,15 +14,15 @@ jobs:
 
       - name: Previous Txt 
         run: echo "Not: 0" >> not.txt
-        
-      - name: Build unit.c
-        run: gcc -o unit unit.c
+
+      - name: Build unitTest.c
+        run: gcc -o unitTest unitTest.c
         
       - name: Commit changes
         run: |
           date > generated.txt
           echo not.txt
-          ./unit
+          ./unitTest
           git config user.name mregungor
           git config user.email emre.gungor@ksbu.edu.tr
           git add .
