@@ -1,0 +1,58 @@
+name: C Kodu Testi
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      total_score: 100
+
+    steps:
+    - name: Klonlama
+      uses: actions/checkout@v2
+
+    - name: Gereksinimleri yükle
+      run: sudo apt-get update && sudo apt-get install -y build-essential
+
+    - name: Toplama Fonksiyonu Testi
+      run: |
+        gcc -o fonksiyon fonksiyon.c
+        if [ $(./fonksiyon | grep "10 + 2 = 12" | wc -l) -eq 1 ]; then echo "Toplama fonksiyonu testi geçti."; else echo "Toplama fonksiyonu testi başarısız oldu."; fi
+        echo "${GITHUB_ACTOR} Toplama Fonksiyonu: 25" >> not.txt
+
+    - name: Çıkarma Fonksiyonu Testi
+      run: |
+        gcc -o fonksiyon fonksiyon.c
+        if [ $(./fonksiyon | grep "10 - 2 = 8" | wc -l) -eq 1 ]; then echo "Çıkarma fonksiyonu testi geçti."; else echo "Çıkarma fonksiyonu testi başarısız oldu."; fi
+        echo "${GITHUB_ACTOR} Çıkarma Fonksiyonu: 25" >> not.txt
+
+    - name: Çarpma Fonksiyonu Testi
+      run: |
+        gcc -o fonksiyon fonksiyon.c
+        if [ $(./fonksiyon | grep "10 * 2 = 20" | wc -l) -eq 1 ]; then echo "Çarpma fonksiyonu testi geçti."; else echo "Çarpma fonksiyonu testi başarısız oldu."; fi
+        echo "${GITHUB_ACTOR} Çarpma Fonksiyonu: 25" >> not.txt
+
+    - name: Bölme Fonksiyonu Testi
+      run: |
+        gcc -o fonksiyon fonksiyon.c
+        if [ $(./fonksiyon | grep "10 / 2 = 5.00" | wc -l) -eq 1 ]; then echo "Bölme fonksiyonu testi geçti."; else echo "Bölme fonksiyonu testi başarısız oldu."; fi
+        echo "${GITHUB_ACTOR} Bölme Fonksiyonu: 25" >> not.txt
+
+    - name: Not Dosyası Oluştur
+      run: |
+        total_score=0
+        while read -r line; do
+          score=$(echo "$line" | awk '{print $NF}')
+          total_score=$((total_score + score))
+        done < not.txt
+        export total_score
+        echo "${GITHUB_ACTOR} puanınız: $total_score" >> not.txt
+
+    - name: Sonucu yükle
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-sonucu
+        path: not.txt
